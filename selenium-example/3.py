@@ -10,7 +10,6 @@ class SearchTest(unittest.TestCase):
         cls.driver.implicitly_wait(30)
         cls.driver.maximize_window()
         cls.driver.get("http://www.bing.com")
-        cls.driver.title()
 
     def test_search_by_category(self):
         self.search_field = self.driver.find_element_by_name("q")
@@ -24,8 +23,9 @@ class SearchTest(unittest.TestCase):
         self.search_field.send_keys("hello world")
         self.search_field.submit()
 
-    def tearDown(self):
-        self.driver.quit()
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
 
 
 if __name__ == '__main__':
