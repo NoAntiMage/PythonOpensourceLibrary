@@ -1,0 +1,33 @@
+import numpy
+import pandas
+
+cameron = pandas.DataFrame(pandas.read_csv('cameron.csv', header=0))
+
+
+print(cameron.shape)
+cameron.info()
+print(cameron.dtypes)
+print(cameron.isnull())
+print(cameron['交易编号'].unique())
+print(cameron.values)
+print(cameron.columns)
+cameron.head(3)
+cameron.tail(3)
+cameron.dropna(how='any')
+cameron.fillna(value=0)
+cameron['余额'].fillna(cameron['余额'].mean())
+cameron['余额'] = cameron['余额'].map(str.strip)
+cameron['余额'] = cameron['余额'].str.lower()
+cameron['余额'].astype('int')
+cameron.rename(colums={'category': 'category-size'})
+cameron['余额'].drop_duplicates()
+cameron['余额'].drop_duplicates(keep='last')
+cameron['余额'].replace('0', '1')
+# df_inner=pandas.merge(df1,df2,how='inner')
+cameron.set_index('id')
+cameron.sort_values(by=['age'])
+cameron.sort_index()
+cameron['group'] = numpy.where(cameron['余额'] > 3000, 'high', 'low')
+cameron.groupby('余额').count()
+cameron.groupby('余额')['id'].count()
+cameron.groupby('余额')['price'].agg([len, numpy.sum, numpy.mean])
