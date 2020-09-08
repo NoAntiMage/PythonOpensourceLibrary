@@ -1,3 +1,5 @@
 .csv
 .idea/*
 *.pdf
+*.html
+tmp.*
